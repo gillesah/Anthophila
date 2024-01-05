@@ -1,5 +1,7 @@
 from rest_framework import serializers, viewsets, permissions, status
 from rest_framework.generics import get_object_or_404
+from rest_framework.response import Response
+
 
 from django.contrib.auth.models import User
 from rest_framework.decorators import action
@@ -14,7 +16,7 @@ class BeehiveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Beehive
-        read_only_fields = ("id",)
+        read_only_fields = ("id", "beeyard_extended")
 
         fields = ["id", "name", "beeyard_extended", 'queen_year',
                   'bee_type']
@@ -26,8 +28,21 @@ class BeehiveViewSet(viewsets.ModelViewSet):
 
     @action(
         detail=True,
+        methods=["POST"]
+    )
+    def add_beehive(self, request, pk):
+        serializer = BeehiveSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+
+    @action(
+        detail=True,
         methods=["PUT"]
     )
-    def add_beehive(self, requiest, pk):
+    def update_beehive(self, request, pk):
         beehive = get_object_or_404(Beehive, pk=pk)
-        beehive.save()
+        serializer = BeehiveSerializer(beehive, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+        # A REVOIR
