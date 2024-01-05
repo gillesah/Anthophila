@@ -4,6 +4,22 @@
 		<title>{% block title %}Anthophila{% endblock %}</title>
 	</head>
 	<body>
+		<header>
+			{% if user.is_authenticated %}
+			<p>Bonjour, {{ user.username }}!</p>
+			<form action="{% url 'logout' %}" method="post">
+				{% csrf_token %}
+				<button type="submit">Déconnexion</button>
+			</form>
+			{% else %}
+			<form action="{% url 'login' %}" method="post">
+				{% csrf_token %}
+				<input type="text" name="username" placeholder="Nom d'utilisateur" />
+				<input type="password" name="password" placeholder="Mot de passe" />
+				<button type="submit">Connexion</button>
+			</form>
+			{% endif %}
+		</header>
 		<main>{% block content %} {% endblock %}</main>
 	</body>
 </html>

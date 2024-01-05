@@ -1,15 +1,17 @@
-from django.urls import path, include
-from anthophila_app.views import my_test_view
+from django.urls import path, include, re_path
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
+from .views import index_view
 
 from django.views.generic import TemplateView
 admin.site.site_header = "Anthophila"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
+    re_path(r'^auth/', include('djoser.urls')),
+    re_path(r'^auth/', include('djoser.urls.jwt')),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
 
-    path('hello', my_test_view),
-    # configuration de la page d'accueil
-    path('', TemplateView.as_view(template_name="index.html")),
+    path('', index_view, name='index'),
 ]

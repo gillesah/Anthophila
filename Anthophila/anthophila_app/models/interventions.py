@@ -14,7 +14,7 @@ from .beehives import Beehive
 
 class Intervention(models.Model):
     beehive = models.ForeignKey(
-        Beehive, on_delete=models.CASCADE, related_name='intervention', null=True, blank=True)
+        Beehive, on_delete=models.CASCADE, related_name='interventions', null=True, blank=True)
     TYPE_CHOICE = [
         ('suppression_cellules', 'Suppression des cellules royales'),
         ('check_sante', 'Check de santé'),
@@ -26,3 +26,4 @@ class Intervention(models.Model):
         ('traitement', 'Traitement')
     ]
     type_intervention = models.CharField(max_length=40, choices=TYPE_CHOICE)
+    intervention_date = models.DateField(null=True, blank=True)
