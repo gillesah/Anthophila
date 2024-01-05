@@ -1,0 +1,12 @@
+SECRET_KEY=xxx
+ALLOWED_HOSTS=xxx
+CORS_ALLOWED_ORIGINS=xxx
+DEBUG=xxx
+
+# DB related
+DB_ENGINE=xxx
+DB_NAME=xxx
+DB_USER=xxx
+DB_PASSWORD=xxx
+DB_HOST=xxx
+DB_PORT=xxx
