@@ -8,18 +8,7 @@ from rest_framework.decorators import action
 
 
 from anthophila_app.models import Beehive
-from anthophila_app.views import BeeyardSerializer
-
-
-class BeehiveSerializer(serializers.ModelSerializer):
-    beeyard_extended = BeeyardSerializer(source="beeyard", read_only=True)
-
-    class Meta:
-        model = Beehive
-        read_only_fields = ("id", "beeyard_extended")
-
-        fields = ["id", "name", "beeyard_extended", 'queen_year',
-                  'bee_type']
+from .serializer import BeehiveSerializer
 
 
 class BeehiveViewSet(viewsets.ModelViewSet):
@@ -39,10 +28,24 @@ class BeehiveViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=["PUT"]
     )
-    def update_beehive(self, request, pk):
+    def update_beehive(self, request, pk=None):
         beehive = get_object_or_404(Beehive, pk=pk)
         serializer = BeehiveSerializer(beehive, data=request.data)
-
         if serializer.is_valid():
             serializer.save()
-        # A REVOIR
+            return Response(serializer.data)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    @action(
+        detail=True,
+        methods=["PATCH"]
+    )
+    def change_queen(self, request, pk=None):
+        beehive = self.get_object()
+        queen_new_year = request.data.get('queen_year')
+        if queen_new_year is not None:
+            beehive.queen_year = queen_new_year
+            beehive.save()
+            return Response({'status': "L'âge de la reine a été changé"})
+        else:
+            return Response({'error': 'Année non fournie'}, status=status.HTTP_400_BAD_REQUEST)

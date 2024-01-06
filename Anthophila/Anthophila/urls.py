@@ -10,7 +10,7 @@ admin.site.site_header = "Anthophila"
 
 router = routers.DefaultRouter()
 router.register(r'beeyards', BeeyardViewSet)
-router.register(r'beehive', BeehiveViewSet)
+router.register(r'beehives', BeehiveViewSet)
 router.register(r'beekeepers', BeekeeperViewSet)
 
 

@@ -31,7 +31,7 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
-
+APPEND_SLASH = False
 # Application definition
 
 INSTALLED_APPS = [
