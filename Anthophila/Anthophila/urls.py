@@ -4,7 +4,7 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 
-from anthophila_app.views import BeeyardViewSet, BeehiveViewSet, BeekeeperViewSet
+from anthophila_app.views import BeeyardViewSet, BeehiveViewSet, BeekeeperViewSet, ContaminatedViewSet
 admin.site.site_header = "Anthophila"
 
 
@@ -12,6 +12,7 @@ router = routers.DefaultRouter()
 router.register(r'beeyards', BeeyardViewSet)
 router.register(r'beehives', BeehiveViewSet)
 router.register(r'beekeepers', BeekeeperViewSet)
+router.register(r'contaminated', ContaminatedViewSet)
 
 
 urlpatterns = [

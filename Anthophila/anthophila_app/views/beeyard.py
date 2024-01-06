@@ -2,7 +2,7 @@ from rest_framework import serializers, viewsets, permissions, status
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from anthophila_app.models import Beeyard
+from anthophila_app.models import Beeyard, Beehive, Contaminated
 from .serializer import BeeyardDetailedSerializer
 
 # viewset for Beeyard
@@ -12,20 +12,30 @@ class BeeyardViewSet(viewsets.ModelViewSet):
     queryset = Beeyard.objects.all()
     serializer_class = BeeyardDetailedSerializer
 
+
+# to change the year of birth of the queens of all the beehives in a beeyard
+# to use it PATCH in this url : /API/beeyards/2/change_queens/
+
     @action(
         detail=True,
         methods=["PATCH"]
     )
     def change_queens(self, request, pk=None):
-        beehives = self.get_object("beehives_extended")
+        beeyard = self.get_object()
+        queen_new_year = request.data.get('queen_year')
+        Beehive.objects.filter(beeyard=beeyard).update(
+            queen_year=queen_new_year)
+
+    @action(detail=True, methods=["PATCH"])
+    def all_contaminated(self, request, pk=None):
+        beeyard = self.get_object()
+        contamination_date = request.data.get("contamination_date")
+        contamination_disease = request.data.get("contamination_disease")
+        beehives = Beehive.objects.filter(beeyard=beeyard)
         for beehive in beehives:
-            queen_new_year = request.data.get('queen_year')
-            if queen_new_year is not None:
-                beehive.queen_year = queen_new_year
-                beehive.save()
-                return Response({'status': "L'âge des reines des différentes ruches a été changé"})
-            else:
-                return Response({'error': 'Année non fournie'}, status=status.HTTP_400_BAD_REQUEST)
+            Contaminated.objects.filter(beehive=beehive).update_or_create(
+                beehive_id=beehive.id, contamination_date=contamination_date, contamination_disease=contamination_disease)
+        return Response({'status': "Informations de contamination mises à jour pour toutes les ruches du beeyard"})
 
 # Possibilité d'effectuer une action sur toutes les ruches d'un cheptel en même
 # temps

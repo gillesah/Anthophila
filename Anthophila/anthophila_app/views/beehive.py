@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 from rest_framework.decorators import action
 
 
-from anthophila_app.models import Beehive
-from .serializer import BeehiveSerializer
+from anthophila_app.models import Beehive, Contaminated
+from .serializer import BeehiveSerializer, ContaminatedSerializer
 
 
 class BeehiveViewSet(viewsets.ModelViewSet):
@@ -49,3 +49,8 @@ class BeehiveViewSet(viewsets.ModelViewSet):
             return Response({'status': "L'âge de la reine a été changé"})
         else:
             return Response({'error': 'Année non fournie'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ContaminatedViewSet(viewsets.ModelViewSet):
+    queryset = Contaminated.objects.all()
+    serializer_class = ContaminatedSerializer

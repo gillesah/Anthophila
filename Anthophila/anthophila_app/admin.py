@@ -8,7 +8,7 @@ class BeehiveAdmin(admin.ModelAdmin):
 
 
 class ContaminatedAdmin(admin.ModelAdmin):
-    list_display = ('beehive', 'contaminated',
+    list_display = ('beehive',
                     'contamination_date', 'contamination_disease',)
 
 

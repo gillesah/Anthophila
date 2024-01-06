@@ -21,7 +21,7 @@ class Beehive(models.Model):
 class Contaminated(models.Model):
     beehive = models.ForeignKey(
         Beehive, on_delete=models.CASCADE, related_name='contaminations')
-    contaminated = models.BooleanField()
+    # contaminated = models.BooleanField()
     contamination_date = models.DateField(null=True, blank=True)
     contamination_disease = models.CharField(
         max_length=200, null=True, blank=True)
