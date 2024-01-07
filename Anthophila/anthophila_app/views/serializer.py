@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from anthophila_app.models import Beehive, Beeyard, Contaminated
+from anthophila_app.models import Beehive, Beeyard, Contaminated, Intervention
 from django.contrib.auth.models import User
 
 
@@ -16,15 +16,26 @@ class ContaminatedSerializer(serializers.ModelSerializer):
                   "contamination_disease"]
 
 
+class InterventionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Intervention
+        read_only_fields = ("id",)
+
+        fields = ['beehive', 'type_intervention', 'intervention_date']
+
+
 class BeehiveSerializer(serializers.ModelSerializer):
     beeyard_extended = BeeyardSerializer(source='beeyard', read_only=True)
     contaminated_extended = ContaminatedSerializer(
         source='contaminations', many=True, read_only=True)
+    intervention_extended = InterventionSerializer(
+        source='interventions', many=True, read_only=True)
 
     class Meta:
         model = Beehive
         fields = ["id", "name", 'queen_year',
-                  'bee_type', 'beeyard', 'beeyard_extended', 'contaminated_extended']
+                  'bee_type', 'beeyard', 'beeyard_extended', 'contaminated_extended', 'intervention_extended']
 
 
 class BeeyardDetailedSerializer(serializers.ModelSerializer):
