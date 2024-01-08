@@ -5,6 +5,10 @@ Application concernant l'apiculture ayant les deux objectifs principaux suivants
 - Permettre aux apiculteurs de gérer leur cheptel de ruches
 - Mettre à disposition publiquement les données concernant les ruches et les abeilles
 
+## Templating part
+
+The view for the templating part is in [core.py](./anthophila_app/views/core.py)
+
 ## usernames of beekeeper in the database
 
 Roger  
@@ -30,3 +34,9 @@ Thierry
 ```
 
 - Make an intervention on all the beehives in a beeyard : {host}/API/beeyards/{id}/beeyard_intervention/
+
+## Security and permissions :
+
+The permission setup is in the file [permission.py](./anthophila_app/views/serializer.py)
+
+Only the beekeeper of a beehive (or a beeyard) has the permission to edit. For the other users, they can just read.

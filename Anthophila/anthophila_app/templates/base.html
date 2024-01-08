@@ -2,9 +2,14 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>{% block title %}Anthophila{% endblock %}</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 	</head>
 	<body>
 		<header>
+			<div class="row align-items-end border-bottom mb-5">
+				<div class="col align-items-center"> <h1> <a href="/"> Anthophila </a></h1></div>
+				<div class="col">
 			{% if user.is_authenticated %}
 			<p>Bonjour, {{ user.username }}!</p>
 			<form action="{% url 'logout' %}" method="post">
@@ -19,6 +24,7 @@
 				<button type="submit">Connexion</button>
 			</form>
 			{% endif %}
+		</div>
 		</header>
 		<main>{% block content %} {% endblock %}</main>
 	</body>

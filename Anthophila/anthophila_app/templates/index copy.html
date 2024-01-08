@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
+<h2>Coucou {{user.username}}</h2>
+<p>Cheptels :</p>
+<ul>
+	{% for beeyard in beeyards %}
+	<li>
+		{{ beeyard.name }}
+		<ul>
+			{% for beehive in beeyard.beehives.all %}
+			<li>{{ beehive.name }} </li>
+			{% for s in status.all %}
+			<ul>
+				Statut au {{s.status_date}}: {{ s }}
+			</ul>
+			{% empty %}
+			<ul>
+				Pas de status pour la ruche {{ beehive.name }}.
+			</ul>
+			{% endfor %} {% endfor %}
+		</ul>
+	</li>
+	{% endfor %}
+</ul>
+{% endblock %}
