@@ -38,16 +38,27 @@ class BeehiveSerializer(serializers.ModelSerializer):
                   'bee_type', 'beeyard', 'beeyard_extended', 'contaminated_extended', 'intervention_extended']
 
 
+class BeekeeperSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        read_only_fields = ("id",)
+        fields = ["id", "username", "email"]
+
+
 class BeeyardDetailedSerializer(serializers.ModelSerializer):
     beehives_extended = BeehiveSerializer(
         many=True, source='beehives', read_only=False)
+    beekeeper_extended = BeekeeperSerializer(
+        source='beekeeper', read_only=False)
 
     class Meta:
         model = Beeyard
-        fields = ["id", "name", "beekeeper", "beehives_extended"]
+        fields = ["id", "name", "beekeeper",
+                  "beehives_extended", "beekeeper_extended"]
 
 
-class BeekeeperSerializer(serializers.ModelSerializer):
+class BeekeeperDetailedSerializer(serializers.ModelSerializer):
     beeyard_extended = BeeyardDetailedSerializer(
         source="beeyard", read_only=True)
 

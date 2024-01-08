@@ -10,8 +10,23 @@ Application concernant l'apiculture ayant les deux objectifs principaux suivants
 Roger  
 Thierry
 
+## Actions at the beehive level
+
+- change the year of birth of all the queens of all the beehives : {host}/API/beehives/{id}/change_queen/
+
+```
+{"queen_year": 2022}
+
+```
+
 ## Actions at the beeyard (apiary) level
 
 - change the year of birth of all the queens of all the beehives : {host}/API/beeyards/{id}/change_queens/
-- add or update an contamination for all the beehives in a beeyard : {host}/API/beeyards/{id}/all_contaminated/
+- add or update an contamination for all the beehives in a beeyard : {host}/API/beeyards/{id}/all_contaminated/ e.g. data :
+
+```
+{"contamination_date": "2024-01-08", "contamination_disease": " a new contamination of La fausse teigne"}
+
+```
+
 - Make an intervention on all the beehives in a beeyard : {host}/API/beeyards/{id}/beeyard_intervention/

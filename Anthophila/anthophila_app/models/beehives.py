@@ -1,18 +1,23 @@
 from django.db import models
 from .beeyard import Beeyard
+from django.contrib.auth.models import User
 
 
 class Beehive(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
     beeyard = models.ForeignKey(
         Beeyard, on_delete=models.SET_NULL, related_name='beehives', null=True, blank=True)
-
+    beekeeper = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='beehives', null=True, blank=True)
     queen_year = models.IntegerField()
     BEE_TYPE = [('Abeille noire', 'Abeille noire'), ('Abeille italienne', 'Abeille italienne'),
                 ('Abeille autrichienne',
                  'Abeille autrichienne'), ('Abeille russe', 'Abeille russe'),
                 ('Abeille hybride', 'Abeille hybride'),]
     bee_type = models.CharField(max_length=30, choices=BEE_TYPE)
+
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return self.name

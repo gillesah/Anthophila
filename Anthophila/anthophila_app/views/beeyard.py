@@ -2,19 +2,50 @@ from rest_framework import serializers, viewsets, permissions, status
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from django_filters import rest_framework as filters
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import BasePermission, SAFE_METHODS
+
+
 from anthophila_app.models import Beeyard, Beehive, Contaminated, Intervention
 from .serializer import BeeyardDetailedSerializer
+from .permissions import IsBeekeeperOrReadOnly
 
-# viewset for Beeyard
+
+class BeeyardFilter(filters.FilterSet):
+    """_summary_
+
+    Args:
+        filters (FilterSet): 
+        You can make a search by :
+            - name : icontains
+            - the username of the beekeeper : icontains
+            - the type of bee : exact (dropdown list)
+
+
+    """
+
+    class Meta:
+        model = Beeyard
+        fields = {'name': ["icontains"], "beekeeper__username": [
+            'icontains'], "beehives__bee_type": ['exact']}
+# eg search by name : /API/beeyards/?name__icontains=3
+# eg search the beeyard of a beekeeper with a search of type of bee : /API/beeyards/?name__icontains=&beekeeper__username__icontains=Thierry&beehives__bee_type=Abeille+autrichienne
 
 
 class BeeyardViewSet(viewsets.ModelViewSet):
     queryset = Beeyard.objects.all()
     serializer_class = BeeyardDetailedSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = BeeyardFilter
+    # Only the beekeeper can edit his beeyard
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly, IsBeekeeperOrReadOnly]
 
 
 # to change the year of birth of the queens of all the beehives in a beeyard
 # to use it PATCH in this url : /API/beeyards/2/change_queens/
+
 
     @action(
         detail=True,
@@ -47,7 +78,3 @@ class BeeyardViewSet(viewsets.ModelViewSet):
             Intervention.objects.filter(beehive=beehive).update_or_create(
                 beehive_id=beehive.id, type_intervention=type_intervention, intervention_date=intervention_date)
         return Response(status=status.HTTP_200_OK)
-
-
-# Possibilité d'effectuer une action sur toutes les ruches d'un cheptel en même
-# temps
