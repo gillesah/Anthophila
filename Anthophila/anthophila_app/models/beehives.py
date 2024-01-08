@@ -7,8 +7,6 @@ class Beehive(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
     beeyard = models.ForeignKey(
         Beeyard, on_delete=models.SET_NULL, related_name='beehives', null=True, blank=True)
-    beekeeper = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='beehives', null=True, blank=True)
     queen_year = models.IntegerField()
     BEE_TYPE = [('Abeille noire', 'Abeille noire'), ('Abeille italienne', 'Abeille italienne'),
                 ('Abeille autrichienne',
@@ -26,7 +24,6 @@ class Beehive(models.Model):
 class Contaminated(models.Model):
     beehive = models.ForeignKey(
         Beehive, on_delete=models.CASCADE, related_name='contaminations')
-    # contaminated = models.BooleanField()
     contamination_date = models.DateField(null=True, blank=True)
     contamination_disease = models.CharField(
         max_length=200, null=True, blank=True)

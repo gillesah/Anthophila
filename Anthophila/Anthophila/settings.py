@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework.authtoken',
     'djoser',
+    'public',
     'anthophila_app',
     'rest_framework',
     'django_filters',

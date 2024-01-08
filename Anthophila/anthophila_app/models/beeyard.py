@@ -12,3 +12,9 @@ class Beeyard(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Warehouse(models.Model):
+    name = models.CharField(max_length=100)
+    beekeeper = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name='warehouse', null=True, blank=True)

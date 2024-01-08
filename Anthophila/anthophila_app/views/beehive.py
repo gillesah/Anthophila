@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 from rest_framework.decorators import action
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
-
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from anthophila_app.models import Beehive, Contaminated
 from .serializer import BeehiveSerializer, ContaminatedSerializer
@@ -32,9 +33,10 @@ class BeehiveViewSet(viewsets.ModelViewSet):
     serializer_class = BeehiveSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = BeehiveFilter
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
     # Only the beekeeper can edit his beehive
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly, IsBeekeeperOrReadOnly]
 
     @action(
         detail=True,
@@ -75,3 +77,5 @@ class BeehiveViewSet(viewsets.ModelViewSet):
 class ContaminatedViewSet(viewsets.ModelViewSet):
     queryset = Contaminated.objects.all()
     serializer_class = ContaminatedSerializer
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Beehive, Beeyard, Intervention, Contaminated, Status
+from .models import Beehive, Beeyard, Intervention, Contaminated, Status, Warehouse
 
 
 class BeehiveAdmin(admin.ModelAdmin):
@@ -20,12 +20,17 @@ class BeeyardAdmin(admin.ModelAdmin):
     list_display = ('name', 'beekeeper',)
 
 
+class WarehouseAdmin(admin.ModelAdmin):
+    list_display = ('name', 'beekeeper',)
+
+
 class InterventionAdmin(admin.ModelAdmin):
     list_display = ('beehive', 'type_intervention',)
 
 
 admin.site.register(Beehive, BeehiveAdmin)
 admin.site.register(Beeyard, BeeyardAdmin)
+admin.site.register(Warehouse, WarehouseAdmin)
 admin.site.register(Intervention, InterventionAdmin)
 admin.site.register(Contaminated, ContaminatedAdmin)
 admin.site.register(Status, StatusAdmin)
