@@ -26,7 +26,7 @@ class BeehiveFilter(filters.FilterSet):
 # /API/beehives/?queen_year__gt=1999&queen_year__lt=2022
 
 
-class BeehiveViewSet(viewsets.ReadOnlyModelViewSet):
+class BeehivePublicViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Beehive.objects.all()
     serializer_class = BeehiveSerializer
     filter_backends = [DjangoFilterBackend]
@@ -34,6 +34,6 @@ class BeehiveViewSet(viewsets.ReadOnlyModelViewSet):
     # Only the beekeeper can edit his beehive
 
 
-class ContaminatedViewSet(viewsets.ReadOnlyModelViewSet):
+class ContaminatedPublicViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Contaminated.objects.all()
     serializer_class = ContaminatedSerializer

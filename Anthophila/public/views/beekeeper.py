@@ -1,9 +1,11 @@
 from rest_framework import viewsets
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from .serializer import BeekeeperDetailedSerializer
 
 
-class BeekeeperViewSet(viewsets.ReadOnlyModelViewSet):
+class BeekeeperPublicViewSet(viewsets.ReadOnlyModelViewSet):
+    User = get_user_model()
+
     queryset = User.objects.all()
     serializer_class = BeekeeperDetailedSerializer

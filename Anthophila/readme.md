@@ -5,6 +5,16 @@ Application concernant l'apiculture ayant les deux objectifs principaux suivants
 - Permettre aux apiculteurs de gérer leur cheptel de ruches
 - Mettre à disposition publiquement les données concernant les ruches et les abeilles
 
+## Two app : anthophila_app & public
+
+### The Anthophila_app
+
+{host}/API/ : you must be connected to see this API
+
+### Public API
+
+{host}/public/ To have all the public data
+
 ## Templating part
 
 The view for the templating part is in [core.py](./anthophila_app/views/core.py)

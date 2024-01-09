@@ -1,2 +1,7 @@
 from django.db import models
-# le beekeeper sera un user avec group beekeeper
+from django.contrib.auth.models import AbstractUser
+
+
+class Beekeeper(AbstractUser):
+    public_contact = models.CharField(max_length=100)
+    public_authorization = models.BooleanField()

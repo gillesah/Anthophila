@@ -1,5 +1,5 @@
 from django.db import models
-from .beeyard import Beeyard
+from .beeyard import Beeyard, Warehouse
 from django.contrib.auth.models import User
 
 
@@ -7,6 +7,8 @@ class Beehive(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
     beeyard = models.ForeignKey(
         Beeyard, on_delete=models.SET_NULL, related_name='beehives', null=True, blank=True)
+    warehouse = models.ForeignKey(
+        Warehouse, on_delete=models.SET_NULL, related_name='warehouse', null=True, blank=True)
     queen_year = models.IntegerField()
     BEE_TYPE = [('Abeille noire', 'Abeille noire'), ('Abeille italienne', 'Abeille italienne'),
                 ('Abeille autrichienne',

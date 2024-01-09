@@ -32,7 +32,7 @@ class BeeyardFilter(filters.FilterSet):
 # eg search the beeyard of a beekeeper with a search of type of bee : /API/beeyards/?name__icontains=&beekeeper__username__icontains=Thierry&beehives__bee_type=Abeille+autrichienne
 
 
-class BeeyardViewSet(viewsets.ReadOnlyModelViewSet):
+class BeeyardPublicViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Beeyard.objects.all()
     serializer_class = BeeyardDetailedSerializer
     filter_backends = [DjangoFilterBackend]

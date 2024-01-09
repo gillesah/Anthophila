@@ -4,12 +4,11 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.permissions import BasePermission, SAFE_METHODS
+from rest_framework.permissions import IsAuthenticated
 
 
 from anthophila_app.models import Beeyard, Beehive, Contaminated, Intervention
 from .serializer import BeeyardDetailedSerializer
-from .permissions import IsBeekeeperOrReadOnly
 
 
 class BeeyardFilter(filters.FilterSet):
@@ -40,7 +39,7 @@ class BeeyardViewSet(viewsets.ModelViewSet):
     filterset_class = BeeyardFilter
     # Only the beekeeper can edit his beeyard
     permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly, IsBeekeeperOrReadOnly]
+        IsAuthenticated]
 
 
 # to change the year of birth of the queens of all the beehives in a beeyard
