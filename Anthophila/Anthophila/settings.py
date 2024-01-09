@@ -45,9 +45,10 @@ INSTALLED_APPS = [
     'axes',
     'djoser',
     'public',
-    'anthophila_app',
     'rest_framework',
     'django_filters',
+    'anthophila_app',
+
 
 ]
 REST_FRAMEWORK = {
@@ -98,7 +99,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Anthophila.wsgi.application'
 
-AUTH_USER_MODEL = 'anthophila_app.Beekeeper'
+AUTH_USER_MODEL = "anthophila_app.User"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

@@ -50,3 +50,7 @@ Thierry
 The permission setup is in the file [permission.py](./anthophila_app/views/serializer.py)
 
 Only the beekeeper of a beehive (or a beeyard) has the permission to edit. For the other users, they can just read.
+
+## ID and UUID
+
+Beehives and the beekeepers have UUID as ID.

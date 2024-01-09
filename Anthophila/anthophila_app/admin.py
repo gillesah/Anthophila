@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Beehive, Beeyard, Intervention, Contaminated, Status, Warehouse
+from .models import Beehive, Beeyard, Intervention, Contaminated, Status, Warehouse, User
 
 
 class BeehiveAdmin(admin.ModelAdmin):
@@ -28,12 +28,18 @@ class InterventionAdmin(admin.ModelAdmin):
     list_display = ('beehive', 'type_intervention',)
 
 
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('username', 'email', 'first_name',
+                    'last_name', 'public_contact', 'public_authorization')
+
+
 admin.site.register(Beehive, BeehiveAdmin)
 admin.site.register(Beeyard, BeeyardAdmin)
 admin.site.register(Warehouse, WarehouseAdmin)
 admin.site.register(Intervention, InterventionAdmin)
 admin.site.register(Contaminated, ContaminatedAdmin)
 admin.site.register(Status, StatusAdmin)
+admin.site.register(User, UserAdmin)
 
 
 # inline admin
