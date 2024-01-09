@@ -3,7 +3,7 @@ from .models import Beehive, Beeyard, Intervention, Contaminated, Status, Wareho
 
 
 class BeehiveAdmin(admin.ModelAdmin):
-    list_display = ('name', 'beeyard',  'queen_year',
+    list_display = ('id', 'name', 'beeyard',  'queen_year',
                     'bee_type',)
 
 
@@ -16,8 +16,14 @@ class StatusAdmin(admin.ModelAdmin):
     list_display = ('beehive', 'status', 'status_date',)
 
 
+class BeehiveInline(admin.TabularInline):
+    model = Beehive
+    extra = 1
+
+
 class BeeyardAdmin(admin.ModelAdmin):
     list_display = ('name', 'beekeeper',)
+    inlines = [BeehiveInline]
 
 
 class WarehouseAdmin(admin.ModelAdmin):
@@ -29,7 +35,7 @@ class InterventionAdmin(admin.ModelAdmin):
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('username', 'email', 'first_name',
+    list_display = ('id', 'username', 'email', 'first_name',
                     'last_name', 'public_contact', 'public_authorization')
 
 

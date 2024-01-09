@@ -5,6 +5,7 @@ from .serializer import BeekeeperDetailedSerializer
 
 
 class BeekeeperViewSet(viewsets.ModelViewSet):
+    
     User = get_user_model()
 
     queryset = User.objects.all()

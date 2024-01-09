@@ -2,6 +2,7 @@ from django.db import models
 import uuid
 from .beeyard import Beeyard, Warehouse
 from django.contrib.auth.models import User
+from django_fsm import FSMField, transition
 
 
 class Beehive(models.Model):
@@ -22,12 +23,25 @@ class Beehive(models.Model):
                  'Abeille autrichienne'), ('Abeille russe', 'Abeille russe'),
                 ('Abeille hybride', 'Abeille hybride'),]
     bee_type = models.CharField(max_length=30, choices=BEE_TYPE)
+    fsm_status = FSMField(default='new')
 
     class Meta:
         ordering = ['name']
 
     def __str__(self):
         return self.name
+
+    # @transition(field=fsm_status, source="green", target="yellow")
+    # def to_state_yellow(self):
+    #     return "Light switched to yellow!"
+
+    # @transition(field=fsm_status, source="yellow", target="red")
+    # def to_state_red(self):
+    #     return "Light switched to red!"
+
+    # @transition(field=fsm_status, source="red", target="green")
+    # def to_state_green(self):
+    #     return "Light switched to green!"
 
 
 class Contaminated(models.Model):

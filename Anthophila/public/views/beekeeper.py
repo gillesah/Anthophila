@@ -6,9 +6,7 @@ from .serializer import BeekeeperDetailedSerializer
 
 class BeekeeperPublicViewSet(viewsets.ReadOnlyModelViewSet):
     User = get_user_model()
-    
-    #if User.public_authorization == True:
-    
 
+    # if User.public_authorization == True:
     queryset = User.objects.all()
     serializer_class = BeekeeperDetailedSerializer
