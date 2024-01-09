@@ -1,9 +1,6 @@
 # Anthophila, l'application pour les apiculteurs
 
-Application concernant l'apiculture ayant les deux objectifs principaux suivants :
-
-- Permettre aux apiculteurs de gérer leur cheptel de ruches
-- Mettre à disposition publiquement les données concernant les ruches et les abeilles
+Anthophila is an application for beekeepers, enabling them not only to manage their apiaries and hives, but also to make data concerning their hives and bees publicly available.
 
 ## Two app : anthophila_app & public
 
