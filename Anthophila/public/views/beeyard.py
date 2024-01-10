@@ -4,11 +4,11 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.permissions import BasePermission, SAFE_METHODS
+# from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 
 from anthophila_app.models import Beeyard, Beehive, Contaminated, Intervention
-from .serializer import BeeyardDetailedSerializer
+from public.views.serializer import BeeyardDetailedSerializer
 
 
 class BeeyardFilter(filters.FilterSet):

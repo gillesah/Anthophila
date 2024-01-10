@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from anthophila_app.models import Beehive, Beeyard, Contaminated, Intervention
-from django.contrib.auth.models import User
+from anthophila_app.models import Beehive, Beeyard, Contaminated, Intervention, User
 
 
 class BeeyardSerializer(serializers.ModelSerializer):

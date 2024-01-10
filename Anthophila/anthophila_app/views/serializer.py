@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from anthophila_app.models import Beehive, Beeyard, Contaminated, Intervention
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class BeeyardSerializer(serializers.ModelSerializer):
@@ -50,7 +52,7 @@ class BeeyardDetailedSerializer(serializers.ModelSerializer):
     beehives_extended = BeehiveSerializer(
         many=True, source='beehives', read_only=False)
     beekeeper_extended = BeekeeperSerializer(
-        source='beekeeper', read_only=False)
+        source='user', read_only=False)
 
     class Meta:
         model = Beeyard
