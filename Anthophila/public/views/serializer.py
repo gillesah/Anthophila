@@ -42,7 +42,7 @@ class BeekeeperSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         read_only_fields = ("id",)
-        fields = ["id", "username", "email"]
+        fields = ["id", "username", "public_contact"]
 
 
 class BeeyardDetailedSerializer(serializers.ModelSerializer):
@@ -66,4 +66,4 @@ class BeekeeperDetailedSerializer(serializers.ModelSerializer):
         read_only_fields = ("id",)
 
         fields = ["id", "username", "first_name",
-                  "last_name", "email", "beeyard_extended"]
+                  "last_name", "public_contact", "beeyard_extended"]
