@@ -4,10 +4,14 @@ from .models import Beehive, Beeyard, Intervention, Contaminated, Status, Wareho
 class InterventionInLine(admin.TabularInline):
     model = Intervention
     extra = 1
+class StatusInLine(admin.TabularInline):
+    model = Status
+    extra = 1
+    
 class BeehiveAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'beeyard',  'queen_year',
                     'bee_type',)
-    inlines = [InterventionInLine]
+    inlines = [InterventionInLine, StatusInLine]
 
 
 class ContaminatedAdmin(admin.ModelAdmin):
