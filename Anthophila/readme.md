@@ -12,7 +12,7 @@ Anthophila is an application for beekeepers, enabling them not only to manage th
 
 {host}/public/ To have all the public data
 
-The following data are available in the public application:
+The following data are available in the public API:
 
 - Information on beekeepers when they have given their authorization
 - information on beeyards

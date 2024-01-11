@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from anthophila_app.models import Beeyard, Beehive, Status
-from django.contrib.auth.models import User
+from anthophila_app.models import Beeyard, Beehive, Status, User
 
 
 def index_view(request):

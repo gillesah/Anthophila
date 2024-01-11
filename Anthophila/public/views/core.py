@@ -1,14 +1,12 @@
 from django.shortcuts import render, get_object_or_404
-from anthophila_app.models import Beeyard, Beehive, Status
-from django.contrib.auth.models import User
-
+from anthophila_app.models import Beeyard, Beehive, Status, User
 
 def index_view(request):
     context = {'beeyards':  Beeyard.objects.all(
     ),  'beehives': Beehive.objects.all(), 'status': Status.objects.all(), "beekeepers": User.objects.all()}
 
     # if the user is authenticated, he can see his elements.
-    if request.user.is_authenticated:
+    if request.User.is_authenticated:
         user_beeyards = Beeyard.objects.filter(beekeeper=request.user)
         context['user_beeyards'] = user_beeyards
 
