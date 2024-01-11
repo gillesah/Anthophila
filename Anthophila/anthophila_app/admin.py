@@ -1,10 +1,13 @@
 from django.contrib import admin
 from .models import Beehive, Beeyard, Intervention, Contaminated, Status, Warehouse, User
 
-
+class InterventionInLine(admin.TabularInline):
+    model = Intervention
+    extra = 1
 class BeehiveAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'beeyard',  'queen_year',
                     'bee_type',)
+    inlines = [InterventionInLine]
 
 
 class ContaminatedAdmin(admin.ModelAdmin):
@@ -21,6 +24,7 @@ class BeehiveInline(admin.TabularInline):
     extra = 1
 
 
+    
 class BeeyardAdmin(admin.ModelAdmin):
     list_display = ('name', 'beekeeper',)
     inlines = [BeehiveInline]

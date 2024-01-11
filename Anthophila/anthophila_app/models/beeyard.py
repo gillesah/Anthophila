@@ -13,7 +13,7 @@ from anthophila_app.models import User
 
 class Beeyard(models.Model):
     name = models.CharField(max_length=100)
-    beekeeper = models.OneToOneField(
+    beekeeper = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='beeyards', null=True, blank=True)
 
     def __str__(self):
