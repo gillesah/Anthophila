@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  db_anthophila:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    env_file: .env
+    ports:
+      - "5435:5432"
+
+  web_anthophila:
+    build:
+      context: . # Répertoire racine Anthophila_dk/
+      dockerfile: ./docker/Dockerfile
+
+    command: python Anthophila/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    env_file: .env
+    ports:
+      - "8002:8000"
+    environment:
+      - DEBUG=${DEBUG}
+      - SECRET_KEY=${SECRET_KEY}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+    depends_on:
+      - db_anthophila
+
+volumes:
+  postgres_data:

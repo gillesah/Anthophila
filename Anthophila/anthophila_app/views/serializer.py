@@ -49,7 +49,7 @@ class BeeyardDetailedSerializer(serializers.ModelSerializer):
     beehives_extended = BeehiveSerializer(
         many=True, source='beehives', read_only=False)
     beekeeper_extended = BeekeeperSerializer(
-        source='user', read_only=False)
+        source='beekeeper', read_only=False)
 
     class Meta:
         model = Beeyard
