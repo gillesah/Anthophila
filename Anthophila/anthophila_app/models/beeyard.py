@@ -12,6 +12,9 @@ from anthophila_app.models import User
 
 
 class Beeyard(models.Model):
+    """ Beeyard
+    a beekeeper is the owner of one or more beeyard
+    """
     name = models.CharField(max_length=100)
     beekeeper = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='beeyards', null=True, blank=True)
@@ -21,6 +24,8 @@ class Beeyard(models.Model):
 
 
 class Warehouse(models.Model):
+    """ warehouse
+        to use if the beehive is not in a beehive"""
     name = models.CharField(max_length=100)
     beekeeper = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name='warehouse', null=True, blank=True)

@@ -6,7 +6,10 @@ from django_fsm import FSMField, transition
 
 
 class Beehive(models.Model):
-
+""" Model of a beehive 
+    The ID is created with UUID
+    The fsm_status was just in testing
+"""
     id = models.UUIDField(
         auto_created=True,
         primary_key=True,
@@ -45,6 +48,13 @@ class Beehive(models.Model):
 
 
 class Contaminated(models.Model):
+    """Contamination of a beehive or a beeyard
+
+
+    Returns:
+        contamination_date: date
+        contamination_disease = text
+    """
     beehive = models.ForeignKey(
         Beehive, on_delete=models.CASCADE, related_name='contaminations')
     contamination_date = models.DateField(null=True, blank=True)
@@ -56,6 +66,13 @@ class Contaminated(models.Model):
 
 
 class Status(models.Model):
+    """status of a beehive
+
+
+    Returns:
+        status type: text
+        status_date = date
+    """
     beehive = models.ForeignKey(
         Beehive, on_delete=models.CASCADE, related_name='statuses')
     STATUS_CHOICE = [('Activité', 'Activité'), ('en attente', 'en attente'),
