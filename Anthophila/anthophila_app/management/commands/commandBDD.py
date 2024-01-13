@@ -16,9 +16,16 @@ class Command(BaseCommand):
                 public_authorization = True,
             )
             beekeeper2 = User.objects.create(
-                username='beekeeper2',
-                email='beekeeper2@example.com',
+                username='Thierry',
+                email='tr@g.com',
                 public_contact='contact2@example.com',
+                public_authorization = False,
+
+            )
+            beekeeper3 = User.objects.create(
+                username='Roger',
+                email='rbouzan@g.com',
+                public_contact='maruche@example.com',
                 public_authorization = True,
 
             )
@@ -31,37 +38,118 @@ class Command(BaseCommand):
                 name='Mon Rucher 2',
                 beekeeper=beekeeper2
             )
+            beeyard3 = Beeyard.objects.create(
+                name='Mon Rucher 3',
+                beekeeper=beekeeper3
+            )
+
 
             # Création des ruches (Beehives)
             beehive1 = Beehive.objects.create(
-                name='Ruche 1',
+                name='RU2390',
                 beeyard=beeyard1,
                 queen_year=2021,
                 bee_type='Abeille noire'
             )
             beehive2 = Beehive.objects.create(
                 name='Ruche 2',
-                beeyard=beeyard2,
+                beeyard=beeyard1,
                 queen_year=2022,
                 bee_type='Abeille italienne'
             )
+            beehive3 = Beehive.objects.create(
+                name='RU2401',
+                beeyard=beeyard2,
+                queen_year=2019,
+                bee_type='Abeille italienne'
+            )
+            beehive4 = Beehive.objects.create(
+                name='RU2401',
+                beeyard=beeyard2,
+                queen_year=2019,
+                bee_type='Abeille italienne'
+            )
+            beehive5 = Beehive.objects.create(
+                name='RU5824',
+                beeyard=beeyard3,
+                queen_year=2019,
+                bee_type='Abeille noire'
+            )
+            beehive6 = Beehive.objects.create(
+                name='RU9824',
+                beeyard=beeyard3,
+                queen_year=2018,
+                bee_type='Abeille italienne'
+            )
+            beehive7 = Beehive.objects.create(
+                name='RU1374',
+                beeyard=beeyard3,
+                queen_year=2023,
+                bee_type='Abeille noire'
+            )
+            beehive8 = Beehive.objects.create(
+                name='RU09238',
+                beeyard=beeyard2,
+                queen_year=2020,
+                bee_type='Abeille noire'
+            )
+            beehive8 = Beehive.objects.create(
+                name='RU12945',
+                beeyard=beeyard1,
+                queen_year=2019,
+                bee_type='Abeille italienne'
+            )
+            beehive9 = Beehive.objects.create(
+                name='RU12945',
+                beeyard=beeyard1,
+                queen_year=2019,
+                bee_type='Abeille italienne'
+            )
+            beehive11 = Beehive.objects.create(
+                name='RU28495',
+                beeyard=beeyard2,
+                queen_year=2019,
+                bee_type='Abeille italienne'
+            )
+            beehive12 = Beehive.objects.create(
+                name='RU28495',
+                beeyard=beeyard1,
+                queen_year=2019,
+                bee_type='Abeille italienne'
+            )
+            beehive12 = Beehive.objects.create(
+                name='RU13059',
+                beeyard=beeyard2,
+                queen_year=2020,
+                bee_type='Abeille autrichienne'
+            )
 
-            # Création d'une intervention
+
+            # Intervention
             intervention = Intervention.objects.create(
                 beehive=beehive1,
                 type_intervention='check_sante',
                 intervention_date='2023-01-01'
-                # Ajoutez d'autres champs nécessaires
+            )
+            intervention2 = Intervention.objects.create(
+                beehive=beehive2,
+                type_intervention='distribution_sirop',
+                intervention_date='2023-01-01'
+            )
+            intervention3 = Intervention.objects.create(
+                beehive=beehive2,
+                type_intervention='distribution_sirop',
+                intervention_date='2023-01-01'
             )
 
-            # Création d'un statut (Status)
+            # Statut
             status = Status.objects.create(
                 beehive=beehive2,
                 status='Activité',
-                status_date='2023-01-01'
+                status_date='2023-01-06'
             )
 
-            # Création d'un enregistrement de contamination
+            # contamination
             contaminated = Contaminated.objects.create(
                 beehive=beehive1,
                 contamination_date='2023-01-10',
