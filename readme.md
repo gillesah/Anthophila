@@ -6,10 +6,10 @@ The host of the docker project is here : http://localhost:8002/
 
 ## Installation
 
-1. Clone the repertory : `https://github.com/gillesah/Anthophila.git`
+1. Clone the repertory : `git clone https://github.com/gillesah/Anthophila.git`
 
 2. Go to the folder Anthophila : `cd Anthophila`
-3. Create an .env file with the .env-template
+3. Create an .env file with the .env-template at the root of the project (Anthophila)
 4. Run Docker : `docker-compose up --build`
 5. Migrate (in an other terminal) `docker-compose exec web_anthophila python Anthophila/manage.py migrate`
 6. Import a fictive database : `docker-compose exec web_anthophila python Anthophila/manage.py commandBDD`
