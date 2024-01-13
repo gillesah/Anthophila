@@ -4,16 +4,10 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 
-from anthophila_app.views import BeeyardViewSet, BeehiveViewSet, BeekeeperViewSet, ContaminatedViewSet, index_view
+from anthophila_app.views import index_view
 from public.views import BeeyardPublicViewSet, BeehivePublicViewSet, BeekeeperPublicViewSet, ContaminatedPublicViewSet
 
 admin.site.site_header = "Anthophila"
-
-router = routers.DefaultRouter()
-router.register(r'beeyards', BeeyardViewSet)
-router.register(r'beehives', BeehiveViewSet)
-router.register(r'beekeepers', BeekeeperViewSet)
-router.register(r'contaminated', ContaminatedViewSet)
 
 router_public = routers.DefaultRouter()
 router_public.register(r'beeyards', BeeyardPublicViewSet)

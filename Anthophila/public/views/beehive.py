@@ -31,9 +31,10 @@ class BeehivePublicViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = BeehiveSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = BeehiveFilter
-    # Only the beekeeper can edit his beehive
+    permission_classes = [permissions.AllowAny] 
 
 
 class ContaminatedPublicViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Contaminated.objects.all()
     serializer_class = ContaminatedSerializer
+    permission_classes = [permissions.AllowAny] 

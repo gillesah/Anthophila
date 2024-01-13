@@ -37,3 +37,4 @@ class BeeyardPublicViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = BeeyardDetailedSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = BeeyardFilter
+    permission_classes = [permissions.AllowAny] 

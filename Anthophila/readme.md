@@ -18,6 +18,12 @@ The following data are available in the public API:
 - information on beeyards
 - information on beehives
 
+## Installation
+
+docker-compose exec web_anthophila python Anthophila/manage.py commandBDD
+
+docker-compose exec web_anthophila python Anthophila/manage.py migrate
+
 ## Templating part
 
 The view for the templating part is in [core.py](./anthophila_app/views/core.py)
@@ -26,6 +32,21 @@ The view for the templating part is in [core.py](./anthophila_app/views/core.py)
 
 Roger  
 Thierry
+
+## Access to the data
+
+### Beekepers
+
+Connected : {host}/API/beekeepers/  
+Not connected : {host}/API_public/beekeepers/
+
+### Beehives
+
+/API_PUBLIC/beehives/
+
+### Beeyards
+
+/API_PUBLIC/beeyards/
 
 ## Actions at the beehive level
 
