@@ -26,7 +26,7 @@ The following data are available in the public API:
 4. Run Docker : `docker-compose up --build`
 5. Migrate (in an other terminal) `docker-compose exec web_anthophila python Anthophila/manage.py migrate`
 6. Import a fictive database : `docker-compose exec web_anthophila python Anthophila/manage.py commandBDD`
-7. Have a glass of hydromel and enjoy ! 
+7. Have a glass of hydromel and enjoy !
 
 docker-compose exec web_anthophila python Anthophila/manage.py commandBDD
 
@@ -86,3 +86,7 @@ Only the beekeeper of a beehive (or a beeyard) has the permission to edit. For t
 ## ID and UUID
 
 Beehives and the beekeepers have UUID as ID.
+
+## access to the admin page
+
+the django admin is here : {host}/bee_anthophila/
