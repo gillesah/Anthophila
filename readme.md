@@ -2,7 +2,8 @@
 
 Anthophila is an application for beekeepers, enabling them not only to manage their apiaries and hives, but also to make data concerning their hives and bees publicly available.
 
-The host of the docker project is here : http://localhost:8002/
+**The host of the docker project is here : http://localhost:8002/**  
+**Database creation is done on the port 5435**
 
 ## Installation
 
