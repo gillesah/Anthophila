@@ -2,11 +2,27 @@
 
 Anthophila is an application for beekeepers, enabling them not only to manage their apiaries and hives, but also to make data concerning their hives and bees publicly available.
 
+The host of the docker project is here : http://localhost:8002/
+
+## Installation
+
+1. Clone the repertory : `https://github.com/gillesah/Anthophila.git`
+
+2. Go to the folder Anthophila : `cd Anthophila`
+3. Create an .env file with the .env-template
+4. Run Docker : `docker-compose up --build`
+5. Migrate (in an other terminal) `docker-compose exec web_anthophila python Anthophila/manage.py migrate`
+6. Import a fictive database : `docker-compose exec web_anthophila python Anthophila/manage.py commandBDD`
+7. Have a glass of hydromel and enjoy !
+
 ## Two app : anthophila_app & public
 
-### The Anthophila_app
+### The Anthophila_app : private app
 
-{host}/API/ : you must be connected to see this API
+{host}/API/ : you must be connected to see this API  
+BEEKEEPERS : {host}/API/beekeepers/  
+BEEHIVES : {host}/API/beekeepers/  
+BEEYARDS : {host}/API/beeyards/
 
 ### Public API
 
@@ -18,43 +34,14 @@ The following data are available in the public API:
 - information on beeyards
 - information on beehives
 
-## Installation
-
-1. Clone the repertory : `https://github.com/gillesah/Anthophila.git`
-2. Go to the folder Anthophila : `cd Anthophila`
-3. Create an .env file with the .env-template
-4. Run Docker : `docker-compose up --build`
-5. Migrate (in an other terminal) `docker-compose exec web_anthophila python Anthophila/manage.py migrate`
-6. Import a fictive database : `docker-compose exec web_anthophila python Anthophila/manage.py commandBDD`
-7. Have a glass of hydromel and enjoy !
-
-docker-compose exec web_anthophila python Anthophila/manage.py commandBDD
-
-docker-compose exec web_anthophila python Anthophila/manage.py migrate
+BEEKEEPERS: {host}/API_PUBLIC/beekeepers/  
+BEEHIVES: {host}/API_PUBLIC/beehives/  
+BEEYARDS : {host}/API_PUBLIC/beeyards/
 
 ## Templating part
 
-The view for the templating part is in [core.py](./anthophila_app/views/core.py)
-
-## usernames of beekeeper in the database
-
-Roger  
-Thierry
-
-## Access to the data
-
-### Beekepers
-
-Connected : {host}/API/beekeepers/  
-Not connected : {host}/API_public/beekeepers/
-
-### Beehives
-
-/API_PUBLIC/beehives/
-
-### Beeyards
-
-/API_PUBLIC/beeyards/
+The view for the templating part is in [core.py](./anthophila_app/views/core.py)  
+You can access it from the host root
 
 ## Actions at the beehive level
 
@@ -62,7 +49,6 @@ Not connected : {host}/API_public/beekeepers/
 
 ```
 {"queen_year": 2022}
-
 ```
 
 ## Actions at the beeyard (apiary) level
@@ -72,14 +58,11 @@ Not connected : {host}/API_public/beekeepers/
 
 ```
 {"contamination_date": "2024-01-08", "contamination_disease": " a new contamination of La fausse teigne"}
-
 ```
 
 - Make an intervention on all the beehives in a beeyard : {host}/API/beeyards/{id}/beeyard_intervention/
 
 ## Security and permissions :
-
-The permission setup is in the file [permission.py](./anthophila_app/views/serializer.py)
 
 Only the beekeeper of a beehive (or a beeyard) has the permission to edit. For the other users, they can just read.
 
