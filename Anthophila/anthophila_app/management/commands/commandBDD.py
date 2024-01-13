@@ -12,14 +12,14 @@ class Command(BaseCommand):
             beekeeper1 = User.objects.create(
                 username='beekeeper1',
                 email='beekeeper1@example.com',
-                public_contact='contact1@example.com'
-                public_authorization = True
+                public_contact='contact1@example.com',
+                public_authorization = True,
             )
             beekeeper2 = User.objects.create(
                 username='beekeeper2',
                 email='beekeeper2@example.com',
-                public_contact='contact2@example.com'
-                public_authorization = True
+                public_contact='contact2@example.com',
+                public_authorization = True,
 
             )
                # Création des ruchers (Beeyards)
@@ -48,7 +48,7 @@ class Command(BaseCommand):
 
             # Création d'une intervention
             intervention = Intervention.objects.create(
-                beehive=beehive,
+                beehive=beehive1,
                 type_intervention='check_sante',
                 intervention_date='2023-01-01'
                 # Ajoutez d'autres champs nécessaires
@@ -56,14 +56,14 @@ class Command(BaseCommand):
 
             # Création d'un statut (Status)
             status = Status.objects.create(
-                beehive=beehive,
+                beehive=beehive2,
                 status='Activité',
                 status_date='2023-01-01'
             )
 
             # Création d'un enregistrement de contamination
             contaminated = Contaminated.objects.create(
-                beehive=beehive,
+                beehive=beehive1,
                 contamination_date='2023-01-10',
                 contamination_disease='Varroa Destructor'
             )
