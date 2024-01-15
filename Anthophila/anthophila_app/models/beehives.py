@@ -6,10 +6,10 @@ from django_fsm import FSMField, transition
 
 
 class Beehive(models.Model):
-""" Model of a beehive 
-    The ID is created with UUID
-    The fsm_status was just in testing
-"""
+    """ Model of a beehive 
+        The ID is created with UUID
+        The fsm_status was just in testing
+    """
     id = models.UUIDField(
         auto_created=True,
         primary_key=True,
