@@ -13,10 +13,10 @@ services:
     ports:
       - "5435:5432"
 
-  web_anthophila:
+  backend:
     build:
       context: . # Répertoire racine Anthophila_dk/
-      dockerfile: ./docker/Dockerfile
+      dockerfile: ./Anthophila/Dockerfile
 
     command: python Anthophila/manage.py runserver 0.0.0.0:8000
     volumes:
@@ -34,6 +34,12 @@ services:
       - DB_PORT=${DB_PORT}
     depends_on:
       - db_anthophila
+  frontend:
+    build: ./frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:
