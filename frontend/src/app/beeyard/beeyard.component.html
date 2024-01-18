@@ -1,0 +1,18 @@
+<p>beeyard works!</p>
+<ul>
+  @for(result of data; track result.id){
+  <li>{{ result.name }}</li>
+  <ul>
+    {{
+      result.beekeeper_extended.username
+    }}
+    :
+    {{
+      result.beekeeper_extended.public_contact
+    }}<br />
+    et voici les ruches : @for(d of result.beehives_extended; track d.id){
+    <li>{{ d.name }}</li>
+    }
+  </ul>
+  }
+</ul>

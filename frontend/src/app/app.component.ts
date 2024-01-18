@@ -1,23 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { CommoModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { BeeyardComponent } from './beeyard/beeyard.component';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, RouterOutlet, BeeyardComponent],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  standalone: true, // Ajoutez le drapeau standalone: true ici
+  styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
-  beeyards: any[] = [];
-
-  constructor(private http: HttpClient) {}
-
-  ngOnInit() {
-    this.http
-      .get<any[]>('http://localhost:8000/API_PUBLIC/beeyards/')
-      .subscribe((data) => {
-        this.beeyards = data;
-      });
-  }
+export class AppComponent {
+  title = 'front';
 }

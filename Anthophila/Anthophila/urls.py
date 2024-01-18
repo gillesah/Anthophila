@@ -15,8 +15,8 @@ router_public.register(r'beehives', BeehivePublicViewSet)
 router_public.register(r'beekeepers', BeekeeperPublicViewSet)
 router_public.register(r'contaminated', ContaminatedPublicViewSet)
 urlpatterns = [
-    path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
-    path('bee_anthophila/', admin.site.urls),    re_path(r'^auth/',
+    # path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
+    path('admin/', admin.site.urls),    re_path(r'^auth/',
                                                          include('djoser.urls')),
     re_path(r'^auth/', include('djoser.urls.jwt')),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
