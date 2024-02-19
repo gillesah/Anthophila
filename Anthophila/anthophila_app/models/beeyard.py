@@ -15,6 +15,7 @@ class Beeyard(models.Model):
     """ Beeyard
     a beekeeper is the owner of one or more beeyard
     """
+    id = models.Index
     name = models.CharField(max_length=100)
     beekeeper = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='beeyards', null=True, blank=True)

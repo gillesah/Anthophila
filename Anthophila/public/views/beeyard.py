@@ -26,7 +26,7 @@ class BeeyardFilter(filters.FilterSet):
 
     class Meta:
         model = Beeyard
-        fields = {'name': ["icontains"], "beekeeper__username": [
+        fields = {'id': ['exact'], 'name': ["icontains"], "beekeeper__username": [
             'icontains'], "beehives__bee_type": ['exact']}
 # eg search by name : /API/beeyards/?name__icontains=3
 # eg search the beeyard of a beekeeper with a search of type of bee : /API/beeyards/?name__icontains=&beekeeper__username__icontains=Thierry&beehives__bee_type=Abeille+autrichienne
@@ -37,4 +37,4 @@ class BeeyardPublicViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = BeeyardDetailedSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = BeeyardFilter
-    permission_classes = [permissions.AllowAny] 
+    permission_classes = [permissions.AllowAny]

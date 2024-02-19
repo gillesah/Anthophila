@@ -26,7 +26,7 @@ class BeeyardFilter(filters.FilterSet):
 
     class Meta:
         model = Beeyard
-        fields = {'name': ["icontains"], "beekeeper__username": [
+        fields = {'id': ["exact"], 'name': ["icontains"], "beekeeper__username": [
             'icontains'], "beehives__bee_type": ['exact']}
 # eg search by name : /API/beeyards/?name__icontains=3
 # eg search the beeyard of a beekeeper with a search of type of bee : /API/beeyards/?name__icontains=&beekeeper__username__icontains=Thierry&beehives__bee_type=Abeille+autrichienne
@@ -44,7 +44,6 @@ class BeeyardViewSet(viewsets.ModelViewSet):
 
 # to change the year of birth of the queens of all the beehives in a beeyard
 # to use it PATCH in this url : /API/beeyards/2/change_queens/
-
 
     @action(
         detail=True,

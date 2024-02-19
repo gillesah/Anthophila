@@ -17,7 +17,8 @@ class BeehiveFilter(filters.FilterSet):
         model = Beehive
         fields = {'name': ["icontains"],
                   'bee_type': ["exact"],
-                  'queen_year': ['exact', 'gt', 'gte', 'lt', 'lte']
+                  'queen_year': ['exact', 'gt', 'gte', 'lt', 'lte'],
+                  'beeyard': ['exact']
                   }
 # pour tester
 # /API/beehives/?name__icontains=ruru
@@ -31,10 +32,10 @@ class BeehivePublicViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = BeehiveSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = BeehiveFilter
-    permission_classes = [permissions.AllowAny] 
+    permission_classes = [permissions.AllowAny]
 
 
 class ContaminatedPublicViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Contaminated.objects.all()
     serializer_class = ContaminatedSerializer
-    permission_classes = [permissions.AllowAny] 
+    permission_classes = [permissions.AllowAny]
