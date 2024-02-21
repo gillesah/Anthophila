@@ -32,7 +32,7 @@ class BeehiveViewSet(viewsets.ModelViewSet):
     serializer_class = BeehiveSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = BeehiveFilter
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    # authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
 
     @action(

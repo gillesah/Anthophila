@@ -14,13 +14,13 @@
 		</div>
 	</div>
 	<RuchesApp v-if="selectedBeeyardId" :key="selectedBeeyardId" :beeyardId="selectedBeeyardId" />
-
-	<div v-if="isAuthenticated" class="user-info">COUSEOUFQSDF QSDF QSDF J</div>
 </template>
 <script>
 import RuchesApp from "./RuchesApp.vue";
 
 export default {
+	props: ["beeyard"],
+
 	components: {
 		RuchesApp,
 	},
@@ -35,10 +35,11 @@ export default {
 	mounted() {
 		this.fetchBeeyards();
 		const authToken = localStorage.getItem("authToken");
-		const username = localStorage.getItem("username");
-		if (authToken) {
-			this.isAuthenticated = true;
-			this.username = username;
+		const id = localStorage.getItem("id");
+
+		if (!authToken) {
+			console.error("Token d'authentification non trouvé. Veuillez vous connecter.");
+			return;
 		}
 	},
 	methods: {

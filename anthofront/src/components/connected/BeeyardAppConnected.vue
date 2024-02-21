@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h2>Tous les ruchers quand connecté</h2>
+		<h2>Tous les ruchers</h2>
 
 		<div class="row beeyardchoice">
 			<div v-for="beeyard in data" :key="beeyard.id" @click="selectBeeyard(beeyard.id)" class="col-md-3 col-sm-6">
@@ -19,21 +19,47 @@
 import RuchesApp from "../RuchesApp.vue";
 
 export default {
+	props: ["beeyard"],
+
 	components: {
 		RuchesApp,
 	},
 	data() {
 		return {
 			data: [],
+
 			selectedBeeyardId: null,
+			isAuthenticated: false,
 		};
 	},
 	mounted() {
 		this.fetchBeeyards();
+		const authToken = localStorage.getItem("authToken");
+		const id = localStorage.getItem("id");
+
+		const username = localStorage.getItem("username");
+		if (authToken) {
+			this.isAuthenticated = true;
+			this.username = username;
+			this.id = id;
+		}
 	},
 	methods: {
 		fetchBeeyards() {
-			fetch("http://localhost:8008/API_PUBLIC/beeyards/")
+			const authToken = localStorage.getItem("authToken");
+			const id = localStorage.getItem("id");
+
+			if (!authToken) {
+				console.error("Token d'authentification non trouvé. Veuillez vous connecter.");
+				return;
+			}
+
+			fetch(`http://localhost:8008/API/beeyards/?beekeeper__id=${id}`, {
+				headers: {
+					Authorization: `Bearer ${authToken}`,
+					"Content-Type": "application/json",
+				},
+			})
 				.then((response) => response.json())
 				.then((data) => {
 					this.data = data.results;
@@ -42,27 +68,6 @@ export default {
 		},
 		selectBeeyard(id) {
 			this.selectedBeeyardId = id;
-		},
-		fetchData() {
-			const authToken = localStorage.getItem("authToken");
-			if (!authToken) {
-				console.error("Token d'authentification non trouvé. Veuillez vous connecter.");
-				return;
-			}
-
-			fetch("http://localhost:8008/chemin/de/votre/api", {
-				method: "GET", // ou autre méthode HTTP selon l'opération
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${authToken}`,
-				},
-			})
-				.then((response) => response.json())
-				.then((data) => {
-					// Traitez les données reçues de l'API
-					console.log(data);
-				})
-				.catch((error) => console.error("Erreur:", error));
 		},
 	},
 };
@@ -77,7 +82,6 @@ export default {
 .card {
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	border: none !important;
-	background-color: bisque;
 }
 .card:hover {
 	transform: scale(1.05);

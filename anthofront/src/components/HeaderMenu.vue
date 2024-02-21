@@ -10,12 +10,11 @@
 				<div class="'bi ' + menu_icon" @click="toggleMenu">
 					<i :class="menu_icon"></i>
 				</div>
-				<div :class="{ desktop_menu: true, mobile_menu: menuValue }">
+				<div :class="{ desktop_menu: true, mobile_menu: menuValue }" id="desktop_menu">
 					<ul>
 						<li @click="closeMenu"><a href="/lesruches">Toutes les ruches</a></li>
 						<li @click="closeMenu" v-if="isAuthenticated"><a href="/mesruches">Mes ruches</a></li>
-						<li @click="closeMenu">Courses</li>
-						<li @click="closeMenu">Contact</li>
+						<li @click="closeMenu" v-if="isAuthenticated"><a href="/create"> Créer une ruche</a></li>
 					</ul>
 				</div>
 			</div>
@@ -33,9 +32,9 @@
 										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
-										<form @submit.prevent="login">
+										<form @submit.prevent="login" class="col">
 											<input v-model="username" type="text" placeholder="Nom d'utilisateur" />
-											<input v-model="password" type="password" placeholder="Mot de passe" />
+											<input v-model="password" type="password" placeholder="Mot de passe" /> <br />
 											<button type="submit" data-bs-dismiss="modal">Connexion</button>
 										</form>
 									</div>
@@ -59,14 +58,20 @@ export default {
 			menu_icon: "bi-list",
 			isAuthenticated: false,
 			username: "",
+			id: "",
 		};
 	},
 	mounted() {
 		const authToken = localStorage.getItem("authToken");
 		const username = localStorage.getItem("username");
+		const id = localStorage.getItem("id");
+
 		if (authToken) {
 			this.isAuthenticated = true;
 			this.username = username;
+			this.id = id;
+		} else {
+			this.isAuthenticated = false;
 		}
 	},
 	methods: {
@@ -82,13 +87,16 @@ export default {
 		logout() {
 			localStorage.removeItem("authToken");
 			localStorage.removeItem("username");
+			localStorage.removeItem("id");
+
 			this.isAuthenticated = false;
-			this.username = null; // Mettez à jour pour utiliser null ou une chaîne vide
-			// Optionnel: Redirigez l'utilisateur vers la page d'accueil ou de connexion
-			this.$router.push("/login");
+			this.username = null;
+			this.id = null;
+
+			this.$router.push("/");
 		},
 		async login() {
-			const credentials = { username: this.username, password: this.password };
+			const credentials = { username: this.username, password: this.password, id: this.id };
 			try {
 				const response = await fetch("http://localhost:8008/auth/jwt/create", {
 					method: "POST",
@@ -129,7 +137,10 @@ export default {
 
 				const userInfo = await response.json();
 				localStorage.setItem("username", userInfo.username);
-				this.username = userInfo.username; // Ceci devrait déclencher la mise à jour de l'UI
+				localStorage.setItem("id", userInfo.id);
+
+				this.username = userInfo.username;
+				this.id = userInfo.id;
 			} catch (error) {
 				console.error("Erreur lors de la récupération des informations de l'utilisateur:", error);
 			}
@@ -158,21 +169,44 @@ header {
 	padding: 0;
 	margin: 0;
 }
-.desktop_menu ul li {
+.desktop_menu ul li,
+.desktop_menu ul li a {
 	list-style-type: none;
 	color: #fff;
 	display: inline-block;
-	font-size: 1.5em;
+	font-size: 1.2em !important;
 	margin-left: 0.5em;
+	font-style: none !important;
+	text-decoration: none;
+	font-weight: 300;
 }
-.desktop_menu ul li:hover {
-	font-size: 1.6em;
-	font-weight: bold;
-	cursor: pointer;
-	color: #333;
-	transition: 0.4s ease-in-out;
-	vertical-align: middle;
+
+#desktop_menu ul li a {
+	position: relative;
+	line-height: 1.4em;
+	margin-top: 2em;
+	margin-bottom: 3em;
+	text-decoration: none;
 }
+
+#desktop_menu ul li a::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 1px;
+	border-radius: 4px;
+	background-color: #fff;
+	bottom: 0;
+	left: 0;
+	transform-origin: right;
+	transform: scaleX(0);
+	transition: transform 0.3s ease-in-out;
+}
+#desktop_menu ul li a:hover::after {
+	transform-origin: left;
+	transform: scaleX(1);
+}
+
 .bi-list {
 	display: none;
 }
@@ -192,6 +226,9 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+}
+.modal-body form input {
+	margin: 1em;
 }
 
 @media screen and (min-width: 128px) and (max-width: 900px) {
