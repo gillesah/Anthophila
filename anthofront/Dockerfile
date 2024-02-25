@@ -1,22 +1,28 @@
-FROM node:lts-alpine
+# Utiliser une image de base Node.js
+FROM node:latest
 
-# installe un simple serveur http pour servir un contenu statique
-RUN npm install -g http-server
+# Définir le répertoire de travail dans le conteneur
+WORKDIR /vue
 
-# définit le dossier 'app' comme dossier de travail
-WORKDIR /app
+# Copier les fichiers de dépendances et installer les dépendances
+# Assurez-vous que les fichiers package.json et package-lock.json (si existant) sont copiés dans le répertoire de travail
+COPY anthofront/package*.json ./
 
-# copie 'package.json' et 'package-lock.json' (si disponible)
-COPY package*.json ./
-
-# installe les dépendances du projet
+# Installer les dépendances du projet
 RUN npm install
 
-# copie les fichiers et dossiers du projet dans le dossier de travail (par exemple : le dossier 'app')
-COPY . .
 
-# construit l'app pour la production en la minifiant
+# Copier le reste des fichiers du projet Vue.js dans le conteneur
+COPY anthofront/ .
+
+# Construire l'application pour la production
 RUN npm run build
 
-EXPOSE 8080
-CMD [ "http-server", "dist" ]
+# Installer un serveur HTTP simple pour servir l'application
+RUN npm install -g http-server
+
+# Exposer le port sur lequel le serveur HTTP écoute
+EXPOSE 80
+
+# Servir l'application
+CMD ["http-server", "dist", "-p", "80"]
