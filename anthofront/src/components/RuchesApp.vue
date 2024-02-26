@@ -26,7 +26,7 @@ export default {
 	},
 	methods: {
 		fetchRuches() {
-			fetch(`http://localhost:8008/API_PUBLIC/beehives/?beeyard=${this.beeyardId}`)
+			fetch(`https://api.anthophila.fr/API_PUBLIC/beehives/?beeyard=${this.beeyardId}`)
 				.then((response) => response.json())
 				.then((data) => {
 					this.ruches = data.results;

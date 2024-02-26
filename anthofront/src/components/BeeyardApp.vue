@@ -44,7 +44,7 @@ export default {
 	},
 	methods: {
 		fetchBeeyards() {
-			fetch("http://localhost:8008/API_PUBLIC/beeyards/")
+			fetch("https://api.anthophila.fr/API_PUBLIC/beeyards/")
 				.then((response) => response.json())
 				.then((data) => {
 					this.data = data.results;

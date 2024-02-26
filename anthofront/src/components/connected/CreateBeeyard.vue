@@ -66,7 +66,7 @@ export default {
 				beekeeper: beekeeperId,
 			};
 
-			fetch("http://localhost:8008/API/beeyards/", {
+			fetch("https://api.anthophila.fr/API/beeyards/", {
 				method: "POST",
 				headers: {
 					Authorization: `Bearer ${authToken}`,
@@ -101,7 +101,7 @@ export default {
 				beeyard: this.selectedBeeyard,
 			};
 
-			fetch("http://localhost:8008/API/beehives/", {
+			fetch("https://api.anthophila.fr/API/beehives/", {
 				method: "POST",
 				headers: {
 					Authorization: `Bearer ${authToken}`,
@@ -137,7 +137,7 @@ export default {
 				return;
 			}
 
-			fetch(`http://localhost:8008/API/beeyards/?beekeeper__id=${id}`, {
+			fetch(`https://api.anthophila.fr/API/beeyards/?beekeeper__id=${id}`, {
 				headers: {
 					Authorization: `Bearer ${authToken}`,
 					"Content-Type": "application/json",
@@ -150,7 +150,7 @@ export default {
 					return response.json();
 				})
 				.then((data) => {
-					this.beeyards = data.results; // Assurez-vous que cela correspond à la structure de la réponse de votre API
+					this.beeyards = data.results; 
 				})
 				.catch((error) => console.error("Error:", error));
 		},

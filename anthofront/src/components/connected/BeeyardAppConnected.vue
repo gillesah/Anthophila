@@ -54,7 +54,7 @@ export default {
 				return;
 			}
 
-			fetch(`http://localhost:8008/API/beeyards/?beekeeper__id=${id}`, {
+			fetch(`https://api.anthophila.fr/API/beeyards/?beekeeper__id=${id}`, {
 				headers: {
 					Authorization: `Bearer ${authToken}`,
 					"Content-Type": "application/json",

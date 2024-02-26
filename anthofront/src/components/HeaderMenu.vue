@@ -98,7 +98,7 @@ export default {
 		async login() {
 			const credentials = { username: this.username, password: this.password, id: this.id };
 			try {
-				const response = await fetch("http://localhost:8008/auth/jwt/create", {
+				const response = await fetch("https://api.anthophila.fr/auth/jwt/create", {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify(credentials),
@@ -125,7 +125,7 @@ export default {
 			}
 
 			try {
-				const response = await fetch("http://localhost:8008/auth/users/me/", {
+				const response = await fetch("https://api.anthophila.fr/auth/users/me/", {
 					method: "GET",
 					headers: {
 						Authorization: `Bearer ${authToken}`,

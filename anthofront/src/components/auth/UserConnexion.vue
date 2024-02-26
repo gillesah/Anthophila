@@ -23,7 +23,7 @@ export default {
 				password: this.password,
 			};
 
-			fetch("http://localhost:8008/auth/jwt/create", {
+			fetch("https://api.anthophila.fr/auth/jwt/create", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -48,7 +48,7 @@ export default {
 				return;
 			}
 
-			fetch("http://localhost:8008/auth/users/me/", {
+			fetch("https://api.anthophila.fr/auth/users/me/", {
 				// Assurez-vous que cette URL est correcte pour votre backend
 				method: "GET",
 				headers: {
