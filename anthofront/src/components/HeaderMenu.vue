@@ -12,9 +12,9 @@
 				</div>
 				<div :class="{ desktop_menu: true, mobile_menu: menuValue }" id="desktop_menu">
 					<ul>
-						<li @click="closeMenu"><a href="/lesruches">Toutes les ruches</a></li>
-						<li @click="closeMenu" v-if="isAuthenticated"><a href="/mesruches">Mes ruches</a></li>
-						<li @click="closeMenu" v-if="isAuthenticated"><a href="/create"> Créer une ruche</a></li>
+						<li @click="closeMenu"><router-link to="/lesruches">Toutes les ruches</router-link></li>
+						<li @click="closeMenu" v-if="isAuthenticated"><router-link to="/mesruches">Mes ruches</router-link></li>
+						<li @click="closeMenu" v-if="isAuthenticated"><router-link to="/create"> Créer une ruche</router-link></li>
 					</ul>
 				</div>
 			</div>
