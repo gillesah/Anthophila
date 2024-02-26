@@ -34,13 +34,13 @@ export default {
 	},
 	mounted() {
 		this.fetchBeeyards();
-		const authToken = localStorage.getItem("authToken");
-		const id = localStorage.getItem("id");
+		// const authToken = localStorage.getItem("authToken");
+		// const id = localStorage.getItem("id");
 
-		if (!authToken) {
-			console.error("Token d'authentification non trouvé. Veuillez vous connecter.");
-			return;
-		}
+		// if (!authToken) {
+		// 	console.error("Token d'authentification non trouvé. Veuillez vous connecter.");
+		// 	return;
+		// }
 	},
 	methods: {
 		fetchBeeyards() {
